@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool checkValidString(string s) {
+        stack<char>st;
+        for(auto x: s){
+            if(x == '{' || x == '[' || x == '('){
+                st.push(x);
+            }else{
+                if(!st.empty()){
+                    char ch = st.top();
+                    if(x == '}' && ch != '{'){
+                        return false;
+                    }
+                    if(x == ')' && ch != '('){
+                        return false;
+                    }
+                    if(x == ']' && ch != '['){
+                        return false;
+                    }
+                    st.pop();
+                }else{
+                    return false;
+                }
+            }
+        }
+        return st.empty() ? true:false;
+    }
+};
